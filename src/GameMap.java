@@ -7,6 +7,19 @@ public class GameMap {
     // the width of the game board.
     private int[] location;
     // first element is the height location, second is the width location.
+    private int h_end;
+    // height of the ending square
+    private int w_end;
+    // width of the ending square
+
+    public static final String redText = "\u001B[31m";
+    public static final String greenText = "\u001B[32m";
+    public static final String blueText = "\u001B[34m";
+    public static final String resetTextColor = "\u001B[0m";
+
+    private String floorText = greenText + "0" + resetTextColor;
+    private String playerText = redText +"X" + resetTextColor;
+    private String foodText = blueText + "F" + resetTextColor;
 
     public GameMap(int height, int width) {
         this.height = height;
@@ -47,14 +60,6 @@ public class GameMap {
     }
 
     // symbols for map ‾ - _ | └ ┐┌ ┘├ ┤┬ ┴ ┼
-
-    public static final String redText = "\u001B[31m";
-    public static final String greenText = "\u001B[32m";
-    public static final String xText = "\u001B[30m";
-    public static final String resetTextColor = "\u001B[0m";
-
-    private String floorText = greenText + "0" + resetTextColor;
-    private String playerText = redText +"X" + resetTextColor;
     public void showMap() {
         for (int i = 0; i < getHeight(); i++) {
             System.out.print("|");
@@ -97,8 +102,7 @@ public class GameMap {
         if(getLocation()[1]+2 > getWidth()) System.out.println(redText +"this move right is invalid! "+ resetTextColor);
         else location[1]++;
     }
-    private int h_end; // height of the ending square
-    private int w_end; // width of the ending square
+
     public void generate() {
         h_end = ThreadLocalRandom.current().nextInt(0, getHeight() + 1);
         w_end = ThreadLocalRandom.current().nextInt(0, getWidth() + 1);
